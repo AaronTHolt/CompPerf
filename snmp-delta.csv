@@ -1,4 +1,4 @@
-sample,if,outUcastPkts,inOctets,outOctets,inUcastPkts,outNUcastPkts,inNUcastPkts
+sample,if,outUCastPkts,inOctets,outOctets,inUcastPkts,outNUCastPkts,inNUcastPkts
 0,1,0,0,0,0,0,0
 0,2,672,184683,90820,2226,0,0
 0,3,96,116273,14370,866,0,0
