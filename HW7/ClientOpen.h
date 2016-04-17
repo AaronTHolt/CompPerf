@@ -1,5 +1,5 @@
-#ifndef _ClientClosed_h_
-#define _ClientClosed_h_
+#ifndef _ClientOpen_h_
+#define _ClientOpen_h_
 
 #include <stdio.h>
 #include <string.h>
@@ -9,13 +9,13 @@
 #include <fstream>
 using namespace std;
 
-class ClientClosed : public cSimpleModule
+class ClientOpen : public cSimpleModule
 {
 private:
     std::vector<WebRequest *> requests;
 
     int N;
-    
+    double InterarrivalTime;
     double hitRate;
 
     WebRequest *msg;
@@ -23,6 +23,8 @@ private:
     WebRequest *currentlyServing;
 
     ofstream MyFile;
+
+
 
 protected:
     virtual void initialize();

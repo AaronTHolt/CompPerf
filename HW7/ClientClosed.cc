@@ -6,7 +6,11 @@ Define_Module(ClientClosed);
 
 void ClientClosed::initialize()
 {
-    N = par("NumJobs");
+
+    
+    MyFile.open ("OmnetClosed36.csv");
+
+    N = 36;
 
     requests.resize(N);
 
@@ -33,12 +37,33 @@ void ClientClosed::handleMessage(cMessage *msg)
 
         simtime_t responseTime;
         responseTime = simTime() - req->getStartTime();
-        std::cout << "Response Time = " << responseTime << std::endl;
+        // std::cout << "Response Time = " << responseTime << std::endl;
 
-        simtime_t otherTimes;
-        otherTimes = 0;
-        otherTimes = getUtil("^.proxy");
-        std::cout << "Proxy Time = " << otherTimes/simTime() << std::endl;
+        simtime_t proxy;
+        proxy = 0;
+        proxy = getUtil("^.proxy");
+        // std::cout << "Proxy Time = " << proxy/simTime() << std::endl;
+
+        simtime_t router;
+        router = 0;
+        router = getUtil("^.router");
+
+        simtime_t originA;
+        originA = 0;
+        originA = getUtil("^.originA");
+
+        simtime_t originB;
+        originB = 0;
+        originB = getUtil("^.originB");
+
+        //time  resp    proxy   router  originA originB        
+        MyFile << simTime() << ",";
+        MyFile << responseTime << ",";
+        MyFile << proxy/simTime() << ",";
+        MyFile << router/simTime() << ",";
+        MyFile << originA/simTime() << ",";
+        MyFile << originB/simTime() << std::endl;
+
 
         // now, "think" for 250ms and then remind myself to send msg
         req -> setServed( false );

@@ -6,6 +6,10 @@
 #include <omnetpp.h>
 #include "WebRequest_m.h"
 #include <list>
+#include <iostream>
+#include <fstream>
+
+
 
 class Client : public cSimpleModule
 {
@@ -18,6 +22,8 @@ private:
 
     WebRequest *currentlyServing;
     double currentServiceTime;
+
+    std::ofstream MyFile;
 
 protected:
     virtual void initialize();

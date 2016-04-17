@@ -18,6 +18,8 @@ void Proxy::handleMessage(cMessage *msg)
 {
 	WebRequest *req = check_and_cast<WebRequest *>(msg);
 	// WebRequest *req = msg;
+	serviceTime = par("ServiceTime");
+	hitRate = par("hitRate");
 
 	if (req == currentlyServing) {
 		//
@@ -44,11 +46,13 @@ void Proxy::handleMessage(cMessage *msg)
 
 void Proxy::sendMsgOnItsWay(WebRequest *msg)
 {
+	hitRate = par("hitRate");
+	serviceTime = par("ServiceTime");
 	if ( msg -> getServed() ) {
 		EV << "Forwarding message " << msg << " to client " << endl;
 		send(msg, "client$o");
 	} else {
-		if ( uniform(0.0, 1.0) < 0.7 ) {
+		if ( uniform(0.0, 1.0) < hitRate ) {
 			EV << "Hit in proxy cache " << msg << endl;
 			msg -> setServed(true);
 			send(msg, "client$o");

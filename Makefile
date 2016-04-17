@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for HW7
+# OMNeT++/OMNEST Makefile for CompPerf
 #
 # This file was generated with the command:
 #  opp_makemake -f
 #
 
 # Name of target to be created (-o option)
-TARGET = HW7$(EXE_SUFFIX)
+TARGET = CompPerf$(EXE_SUFFIX)
 
 # User interface (uncomment one) (-u option)
 USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
@@ -28,18 +28,10 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
-OBJS = \
-    $O/Client.o \
-    $O/ClientClosed.o \
-    $O/ClientOpen.o \
-    $O/Origin.o \
-    $O/Proxy.o \
-    $O/Router.o \
-    $O/WebRequest_m.o
+OBJS =
 
 # Message files
-MSGFILES = \
-    WebRequest.msg
+MSGFILES =
 
 #------------------------------------------------------------------------------
 
@@ -111,7 +103,7 @@ msgheaders: $(MSGFILES:.msg=_m.h)
 clean:
 	$(qecho) Cleaning...
 	$(Q)-rm -rf $O
-	$(Q)-rm -f HW7 HW7.exe libHW7.so libHW7.a libHW7.dll libHW7.dylib
+	$(Q)-rm -f CompPerf CompPerf.exe libCompPerf.so libCompPerf.a libCompPerf.dll libCompPerf.dylib
 	$(Q)-rm -f ./*_m.cc ./*_m.h
 
 cleanall: clean
@@ -122,28 +114,4 @@ depend:
 	$(Q)$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/Client.o: Client.cc \
-  ./WebRequest_m.h \
-  ./Client.h
-$O/ClientClosed.o: ClientClosed.cc \
-  ./WebRequest_m.h \
-  ./QueueNode.h \
-  ./ClientClosed.h
-$O/ClientOpen.o: ClientOpen.cc \
-  ./QueueNode.h \
-  ./ClientOpen.h \
-  ./WebRequest_m.h
-$O/Origin.o: Origin.cc \
-  ./WebRequest_m.h \
-  ./QueueNode.h \
-  ./Origin.h
-$O/Proxy.o: Proxy.cc \
-  ./QueueNode.h \
-  ./WebRequest_m.h \
-  ./Proxy.h
-$O/Router.o: Router.cc \
-  ./WebRequest_m.h \
-  ./Router.h \
-  ./QueueNode.h
-$O/WebRequest_m.o: WebRequest_m.cc \
-  ./WebRequest_m.h
+
