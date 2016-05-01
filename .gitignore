@@ -1,2 +1,8 @@
-*.csv
+/delta_data.csv
+/snmp-delta.csv
+/HW8/*.csv
+/HW7/*.csv
+/tictoc/*.csv
 /Project/mlpack/*
+/Project/Exp1/*
+/Project/Exp2/*
