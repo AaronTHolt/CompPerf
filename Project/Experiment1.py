@@ -117,45 +117,65 @@ def stream_data_to_csv(filename, csvfile, replications):
     f.close()
 
     repl = 0
+    csv_prefix = "Exp1/"
 
     for line in content:
+        if repl >= replications:
+            break
+
         index = get_index(filename, replications, repl)
 
-
         if "Copy:" in line:
+            tt = 'copy'
+            # print("Repl = ", repl)
             data = str_to_float(line.split())
-            all_data['copy'][index][0] = repl
-            all_data['copy'][index][4] = data[0]
-            all_data['copy'][index][5] = data[1]
+            all_data[tt][index][0] = repl
+            all_data[tt][index][4] = data[0]
+            all_data[tt][index][5] = data[1]
+
+            # print(all_data['copy'][index], repl, index)
+            with open(csv_prefix + tt + '.csv', 'ta') as outcsv:
+                writer = csv.writer(outcsv)
+                writer.writerow(all_data[tt][index])
 
         elif "Scale:" in line:
+            tt = 'scale'
             data = str_to_float(line.split())
-            all_data['scale'][index][0] = repl
-            all_data['scale'][index][4] = data[0]
-            all_data['scale'][index][5] = data[1]
+            all_data[tt][index][0] = repl
+            all_data[tt][index][4] = data[0]
+            all_data[tt][index][5] = data[1]
+
+            # print(all_data['copy'][index], repl, index)
+            with open(csv_prefix + tt + '.csv', 'ta') as outcsv:
+                writer = csv.writer(outcsv)
+                writer.writerow(all_data[tt][index])
 
         elif "Add:" in line:
+            tt = 'add'
             data = str_to_float(line.split())
-            all_data['add'][index][0] = repl
-            all_data['add'][index][4] = data[0]
-            all_data['add'][index][5] = data[1]
+            all_data[tt][index][0] = repl
+            all_data[tt][index][4] = data[0]
+            all_data[tt][index][5] = data[1]
+
+            # print(all_data['copy'][index], repl, index)
+            with open(csv_prefix + tt + '.csv', 'ta') as outcsv:
+                writer = csv.writer(outcsv)
+                writer.writerow(all_data[tt][index])
 
         elif "Triad:" in line:
+            tt = 'triad'
             data = str_to_float(line.split())
-            all_data['triad'][index][0] = repl
-            all_data['triad'][index][4] = data[0]
-            all_data['triad'][index][5] = data[1]
+            all_data[tt][index][0] = repl
+            all_data[tt][index][4] = data[0]
+            all_data[tt][index][5] = data[1]
+
+             # print(all_data['copy'][index], repl, index)
+            with open(csv_prefix + tt + '.csv', 'ta') as outcsv:
+                writer = csv.writer(outcsv)
+                writer.writerow(all_data[tt][index])
 
             ##next replication after triad
             repl += 1
-
-    
-    for ii in files:
-        with open(csv_prefix + ii + '.csv', 'wt') as outcsv:
-            writer = csv.writer(outcsv)
-            writer.writerow(['Repl', 'O Level', '32b or 62b', 'Single Pres', 'Best Rate', 'Avg Time'])
-            writer.writerows(all_data[ii])
-        outcsv.close()
 
 
 
